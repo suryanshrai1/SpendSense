@@ -35,7 +35,7 @@ SpendSense is a simple and intuitive web-based expense tracker that helps you ma
 
 | Light Mode | Dark Mode |
 |------------|-----------|
-![light](https://github.com/user-attachments/assets/43e4f091-9e5a-4030-9e9b-7b244e4c16fe) ![dark](https://github.com/user-attachments/assets/2f96b41d-9a17-4888-a205-604628251e6c)
+![light](https://github.com/user-attachments/assets/43e4f091-9e5a-4030-9e9b-7b244e4c16fe) | ![dark](https://github.com/user-attachments/assets/2f96b41d-9a17-4888-a205-604628251e6c)
 
 
 
