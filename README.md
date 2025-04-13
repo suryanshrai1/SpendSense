@@ -18,7 +18,7 @@ SpendSense is a simple and intuitive web-based expense tracker that helps you ma
 
 ## 🖼️ Demo
 
-[Live Demo Link (optional)](https://suryanshrai1.github.io/SpendSense/)
+[Live Demo Link](https://suryanshrai1.github.io/SpendSense/)
 
 ---
 
@@ -35,7 +35,7 @@ SpendSense is a simple and intuitive web-based expense tracker that helps you ma
 
 | Light Mode | Dark Mode |
 |------------|-----------|
-| ![Light]("C:\Users\suryansh\Pictures\Screenshots\light.png") | ![Dark]("C:\Users\suryansh\Pictures\Screenshots\dark.png") |
+| ![Light](C:\Users\suryansh\Pictures\Screenshots\light.png) | ![Dark](C:\Users\suryansh\Pictures\Screenshots\dark.png) |
 
 ---
 
