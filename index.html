@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" class="transition-colors duration-300">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+
+    <!-- Load Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        };
+    </script>
+
+    <!-- Apply saved theme before anything renders -->
+    <script>
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-6 min-h-screen transition-colors duration-300">
+
+    <!-- Dark mode toggle -->
+    <div class="flex justify-end mb-4">
+        <label class="flex items-center gap-2 cursor-pointer">
+            <span>🌞</span>
+            <input type="checkbox" id="dark-toggle" class="hidden">
+            <div class="w-12 h-6 bg-gray-300 dark:bg-gray-700 rounded-full p-1 flex items-center transition-colors duration-300" id="toggle-track">
+                <div id="toggle-circle"
+                    class="w-4 h-4 bg-white dark:bg-yellow-400 rounded-full shadow-md transform transition-transform duration-300"></div>
+            </div>
+            <span>🌙</span>
+        </label>
+    </div>
+
+    <!-- Layout container -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Left Side: Tracker UI -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow">
+
+            <h1 class="text-2xl font-bold mb-4 text-center">Expense Tracker</h1>
+
+            <div class="text-center mb-4">
+                <h2 class="text-xl">Balance: ₹<span id="balance">0.00</span></h2>
+            </div>
+
+            <form id="transaction-form" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <input type="text" id="desc" placeholder="Description"
+                    class="p-2 border rounded col-span-2 dark:bg-gray-700 dark:border-gray-600" required />
+                <input type="number" id="amount" placeholder="Amount"
+                    class="p-2 border rounded dark:bg-gray-700 dark:border-gray-600" required />
+                <select id="category" class="p-2 border rounded dark:bg-gray-700 dark:border-gray-600" required>
+                    <option value="" disabled selected>Category</option>
+                    <option value="Income">Income</option>
+                    <option value="Food">Food</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add</button>
+            </form>
+
+            <ul id="transaction-list" class="space-y-2 mb-6"></ul>
+        </div>
+
+        <!-- Right Side: Chart -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow flex justify-center items-center">
+            <canvas id="expense-chart" height="300" width="300"></canvas>
+        </div>
+
+    </div>
+</script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
