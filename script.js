@@ -79,17 +79,21 @@ let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
         function updateChart() {
             const categories = {};
+            let total = 0;
+        
             transactions.forEach(tx => {
                 if (tx.category !== "Income") {
-                    categories[tx.category] = (categories[tx.category] || 0) + parseFloat(tx.amount);
+                    const amount = parseFloat(tx.amount);
+                    categories[tx.category] = (categories[tx.category] || 0) + amount;
+                    total += amount;
                 }
             });
-
+        
             const labels = Object.keys(categories);
             const data = Object.values(categories);
-
+        
             if (expenseChart) expenseChart.destroy();
-
+        
             expenseChart = new Chart(chartEl, {
                 type: "pie",
                 data: {
@@ -98,9 +102,23 @@ let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
                         data,
                         backgroundColor: ["#f87171", "#60a5fa", "#34d399", "#fbbf24", "#a78bfa"]
                     }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const value = context.raw;
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${context.label}: ${percentage}%`;
+                                }
+                            }
+                        }
+                    }
                 }
             });
         }
+        
 
         // Theme toggle logic
         window.addEventListener("DOMContentLoaded", () => {
