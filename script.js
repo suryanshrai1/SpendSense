@@ -25,7 +25,11 @@ let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
         function renderTransactions() {
             list.innerHTML = "";
-            transactions.slice().reverse().forEach((tx, index) => {
+        
+            const reversed = transactions.slice().reverse(); // reversed array
+            reversed.forEach((tx, displayIndex) => {
+                const actualIndex = transactions.length - 1 - displayIndex; // true index in original array
+        
                 const li = document.createElement("li");
                 li.className = "flex justify-between items-center bg-gray-50 dark:bg-gray-700 p-3 border rounded";
                 const amountColor = tx.category === "Income" ? "text-green-500" : "text-red-500";
@@ -36,16 +40,17 @@ let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
                         <span class="text-sm text-gray-500">(${tx.category})</span>
                     </div>
                     <div class="space-x-2">
-                        <button onclick="editTransaction(${index})" class="text-yellow-500">Edit</button>
-                        <button onclick="deleteTransaction(${index})" class="text-red-500">Delete</button>
+                        <button onclick="editTransaction(${actualIndex})" class="text-yellow-500">Edit</button>
+                        <button onclick="deleteTransaction(${actualIndex})" class="text-red-500">Delete</button>
                     </div>
                 `;
                 list.appendChild(li);
             });
-
+        
             updateBalance();
             updateChart();
         }
+        
 
         function addTransaction(e) {
             e.preventDefault();
@@ -94,6 +99,9 @@ let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
         
             if (expenseChart) expenseChart.destroy();
         
+            // Detect if dark mode is active
+            const isDarkMode = document.documentElement.classList.contains("dark");
+        
             expenseChart = new Chart(chartEl, {
                 type: "pie",
                 data: {
@@ -113,11 +121,17 @@ let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
                                     return `${context.label}: ${percentage}%`;
                                 }
                             }
+                        },
+                        legend: {
+                            labels: {
+                                color: isDarkMode ? "#ffffff" : "#000000" // Adjust label color for dark/light mode
+                            }
                         }
                     }
                 }
             });
         }
+        
         
 
         // Theme toggle logic
